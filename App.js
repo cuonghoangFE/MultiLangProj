@@ -1,0 +1,17 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
+import React from 'react';
+import AppContainer from './src/modules/Navigation';
+
+import './src/modules/Language';
+import { LanguageProvider } from './src/modules/Language';
+
+const App = () => <LanguageProvider><AppContainer /></LanguageProvider>;
+
+export default App;
