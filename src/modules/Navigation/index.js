@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import HomeScreen from '../Home';
 import SettingsScreen from '../Settings';
 import AboutScreen from '../About';
+import Libi18n from '../Libi18n';
+import Libi18n2 from '../Libi18n2';
 
 const TabNavigator = createBottomTabNavigator({
   Home: {
@@ -14,6 +16,12 @@ const TabNavigator = createBottomTabNavigator({
   },
   About: {
     screen: AboutScreen
+  },
+  Libi18n: {
+    screen: Libi18n
+  },
+  Libi18n2: {
+    screen: Libi18n2
   }
 });
 
