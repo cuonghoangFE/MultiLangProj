@@ -20,19 +20,19 @@ const regexpStr = "".concat(prefix, "(.+?)").concat(suffix);
 const regexpUnescapeStr = "".concat(prefix).concat(unescapePrefix, "(.+?)").concat(unescapeSuffix).concat(suffix);
 const nestingRegexpStr = "".concat(nestingPrefix, "(.+?)").concat(nestingSuffix);
 
-type TVarMap = { [s: string]: string };
+// type TVarMap = { [s: string]: string };
 
-export interface TFunction {
-  // basic usage
-  <
-    TResult = string,
-    TKeys extends TFunctionKeys = string,
-    TInterpolationMap extends TVarMap = object
-  >(
-    i18nKey: TKeys,
-    values?: TInterpolationMap,
-  ): TResult;
-}
+// export interface TFunction {
+//   // basic usage
+//   <
+//     TResult = string,
+//     TKeys extends TFunctionKeys = string,
+//     TInterpolationMap extends TVarMap = object
+//   >(
+//     i18nKey: TKeys,
+//     values?: TInterpolationMap,
+//   ): TResult;
+// }
 
 const multiIndex = (obj,is) => {
   return is.length ? multiIndex(obj[is[0]],is.slice(1)) : obj
@@ -48,26 +48,25 @@ export class LanguageProvider extends React.Component {
 
   updateLanguage = e => this.setState({ language: e });
 
-  t: TFunction = (i18nKey, values) => {
+  t = (i18nKey, values) => {
     const { language } = this.state;
     const langKey = language === 'en' ? en : (language === 'vi' ? vi : it);
     let text = pathIndex(langKey,i18nKey);
-    const isHasVarRegex = text.match(new RegExp(regexpStr, 'g'));
     if (!text) {
       console.warn(`Key ${i18nKey} not found`);
-      return text;
-    }
-    if (isHasVarRegex !== null &&
-      isHasVarRegex.length > 0 &&
-      !values
-    ) {
-      isHasVarRegex.map(keyMissing => console.warn(`Missing key ${keyMissing} in ${language}[${i18nKey}]}`));
       return text;
     }
     for (let i in values) {
       const regexpStr = "".concat(prefix, i).concat(suffix);
       const regexp = new RegExp(regexpStr, 'g');
       text = text.replace(regexp, values[i]);
+    }
+    const isHasVarRegex = text.match(new RegExp(regexpStr, 'g'));
+    if (isHasVarRegex !== null &&
+      isHasVarRegex.length > 0
+    ) {
+      isHasVarRegex.map(keyMissing => console.warn(`Missing key ${keyMissing} in ${language}[${i18nKey}]}`));
+      return text;
     }
     return text;
   }

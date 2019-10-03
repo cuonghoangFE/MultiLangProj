@@ -5,13 +5,13 @@ import { withTranslation, TFunction } from '../Language';
 import { compose } from 'recompose'
 import withNavigationEventsHOC from '../Navigation/withNavigationEvents';
 
-interface TProps {
-  t: TFunction
-  language: String
-  updateLanguage: Function
-}
+// interface TProps {
+//   t: TFunction
+//   language: String
+//   updateLanguage: Function
+// }
 
-const HomeScreen = ({ t, language, updateLanguage }: TProps) => {
+const HomeScreen = ({ t, language, updateLanguage }) => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
@@ -20,7 +20,7 @@ const HomeScreen = ({ t, language, updateLanguage }: TProps) => {
         <Text>{t('change')}</Text>
       </TouchableOpacity>
       <View style={{height: 50}} />
-      <Text style={{ fontSize: 20, marginBottom: 20 }}>{t('hello', { world: language === 'en' ? 'en world' : (language === 'vi' ? 'vi world' : 'it world')}) } )}</Text>
+      <Text style={{ fontSize: 20, marginBottom: 20 }}>{t('hello', { world: language === 'en' ? 'en world' : (language === 'vi' ? 'vi world' : 'it world')}) }</Text>
     </View>
   );
 }
