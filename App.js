@@ -8,8 +8,6 @@
 
 import React from 'react';
 import AppContainer from './src/modules/Navigation';
-
-import './src/modules/Language';
 import { LanguageProvider } from './src/modules/Language';
 
 const App = () => <LanguageProvider><AppContainer /></LanguageProvider>;
